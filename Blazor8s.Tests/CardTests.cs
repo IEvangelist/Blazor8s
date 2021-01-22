@@ -1,4 +1,5 @@
 using Blazor8s.Shared;
+using System.Linq;
 using Xunit;
 
 namespace Blazor8s.Tests
@@ -10,6 +11,7 @@ namespace Blazor8s.Tests
         {
             var deck = CardUtilities.GetShuffledDeck();
             Assert.Equal(52, deck.Count);
+            Assert.Equal(52, deck.Distinct().Count());
         }
     }
 }

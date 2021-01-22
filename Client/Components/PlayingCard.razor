@@ -1,4 +1,5 @@
-﻿<div class="pcard @CssFaceDown" @onclick="(async () => await OnCardSelected.InvokeAsync(Card))">
+﻿<div class="pcard @(CssFaceDown) @(CssSuit)"
+     @onclick="(async () => await OnCardSelected.InvokeAsync(Card))">
     <div class="suit-top">@Value @Suit</div>
     <div class="middle-pips">
         @if (ShowPips)
@@ -7,7 +8,9 @@
             {
                 <span class="pip">@Suit</span>
             }
-        } else {
+        }
+        else
+        {
             <span class="pip face-card-pip">@Suit</span>
         }
     </div>
@@ -36,8 +39,9 @@
     static string ToDisplayValue(CardValue value)
     {
         bool isFaceCard = value == CardValue.Ace || value > CardValue.Ten;
-        return (isFaceCard ? value.ToString()[0] : ((int)value)).ToString();
+        return isFaceCard ? value.ToString()[0].ToString() : ((int)value).ToString();
     }
 
     string CssFaceDown => IsFaceDown ? "back" : null;
+    string CssSuit => Card.Suit.ToString().ToLower();
 }

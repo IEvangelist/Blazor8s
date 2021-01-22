@@ -6,10 +6,10 @@
 @if (!HasJoined)
 {
     <div class="form-group">
-        <label>
+        <label for="user-name">
             User:
-            <input @bind="userName" />
         </label>
+        <input id="user-name" @bind="userName" />
     </div>
 
     <button class="btn btn-primary" @onclick="JoinGame" disabled="@(!IsConnected)">Join Game</button>
@@ -17,15 +17,13 @@
 
 @if (CanStartGame)
 {
-
     <button class="btn btn-primary" @onclick="StartGame">Start Game</button>
-
 }
 
 @if (state.HasGameStarted)
 {
-    <button @onclick="DrawCard">Draw</button>
-    <button @onclick="PlayCard" disabled="@(state.SelectedCard is null)">Play</button>
+    <button class="btn btn-danger" @onclick="DrawCard">Draw</button>
+    <button class="btn btn-primary" @onclick="PlayCard" disabled="@(state.SelectedCard is null)">Play</button>
 
     @foreach (var card in state.Hand)
     {

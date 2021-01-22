@@ -50,7 +50,6 @@ a, .btn-link {
         top: 0.5rem;
     }
 
-
 .suit-top {
     grid-area: suit-top;
 }
@@ -107,3 +106,8 @@ a, .btn-link {
             display: none;
             visibility: hidden;
         }
+
+.pcard.hearts,
+.pcard.diamonds {
+    color: red;
+}
