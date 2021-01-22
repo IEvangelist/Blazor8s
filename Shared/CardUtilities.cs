@@ -35,6 +35,7 @@ namespace Blazor8s.Shared
                 .Select(suit =>
                     (Suit: suit, Values: Enum.GetValues(typeof(CardValue)).Cast<CardValue>()))
                 .SelectMany(pair => pair.Values, (pair, value) => new Card(value, pair.Suit))
-                .ToList();
+                .ToList()
+                .Shuffle();
     }
 }
