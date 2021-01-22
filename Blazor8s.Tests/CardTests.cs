@@ -1,6 +1,4 @@
 using Blazor8s.Shared;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace Blazor8s.Tests
@@ -8,11 +6,10 @@ namespace Blazor8s.Tests
     public class CardTests
     {
         [Fact]
-        public void CanCreateDeck()
+        public void CanCreateShuffledDeck()
         {
-            List<Card> deck = CardUtilities.CreateDeck();
+            var deck = CardUtilities.GetShuffledDeck();
             Assert.Equal(52, deck.Count);
         }
-
     }
 }

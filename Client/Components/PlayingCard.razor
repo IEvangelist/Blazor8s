@@ -1,4 +1,4 @@
-﻿<div class="pcard @CssFaceDown" @onclick="HandleClick">
+﻿<div class="pcard @CssFaceDown" @onclick="(async () => await OnCardSelected.InvokeAsync(Card))">
     <div class="suit-top">@Value @Suit</div>
     <div class="middle-pips">
         @if (ShowPips)
@@ -18,19 +18,13 @@
 
     [Parameter] public bool IsFaceDown { get; set; }
     [Parameter] public Card Card { get; set; }
-
     [Parameter] public EventCallback<Card> OnCardSelected { get; set; }
-    
-    Task HandleClick()
-    {
-        return OnCardSelected.InvokeAsync(Card);
-    }
 
     string Value => ToDisplayValue(Card.Value);
     string Suit => ToSymbol(Card.Suit);
     bool ShowPips => Card.Value != CardValue.Ace && Card.Value < CardValue.Jack;
 
-    string ToSymbol(CardSuit suits) => suits switch
+    static string ToSymbol(CardSuit suit) => suit switch
     {
         CardSuit.Clubs => "♣",
         CardSuit.Spades => "♠",
@@ -39,13 +33,11 @@
         _ => ""
     };
 
-    string ToDisplayValue(CardValue value)
+    static string ToDisplayValue(CardValue value)
     {
         bool isFaceCard = value == CardValue.Ace || value > CardValue.Ten;
-        return isFaceCard ? value.ToString()[0].ToString() : ((int)value).ToString();
+        return (isFaceCard ? value.ToString()[0] : ((int)value)).ToString();
     }
 
     string CssFaceDown => IsFaceDown ? "back" : null;
-
-
 }
